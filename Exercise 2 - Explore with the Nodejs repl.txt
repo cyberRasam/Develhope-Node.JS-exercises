@@ -1,8 +1,0 @@
-$ node
-> const crypto = require('crypto')
-> crypto.
-
-
-> const id = crypto.randomBytes(4).toString('hex')
-> id
-'ad8f9c0d'
