@@ -3,7 +3,7 @@ dotenv.config()
 
 import passport from 'passport'
 import passportJWT from 'passport-jwt'
-import { db } from './controllers/db'
+import { db } from './controllers/db.js'
 const {SECRET} = process.env
 
 passport.use(
