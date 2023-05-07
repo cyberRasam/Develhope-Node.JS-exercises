@@ -13,13 +13,19 @@
     "express-async-errors": "^3.1.1",
     "joi": "^17.9.1",
     "morgan": "^1.10.0",
+    "multer": "^1.4.5-lts.1",
+    "passport": "^0.6.0",
+    "passport-jwt": "^4.0.1",
     "pg-promise": "^11.4.3"
   },
   "devDependencies": {
     "@tsconfig/node18": "^1.0.1",
     "@types/express": "^4.17.14",
     "@types/morgan": "^1.9.3",
+    "@types/multer": "^1.4.7",
     "@types/node": "^18.11.9",
+    "@types/passport": "^1.0.12",
+    "@types/passport-jwt": "^3.0.8",
     "tsc-watch": "^5.0.3",
     "typescript": "^5.0.4"
   }

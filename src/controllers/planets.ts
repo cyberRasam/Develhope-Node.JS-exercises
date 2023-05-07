@@ -1,23 +1,5 @@
 import { Request, Response } from "express";
-import pgPromise from 'pg-promise';
-
-const db = pgPromise()('postgres://postgres:postgres@localhost:5432/video')
-const setupDb= async () => {
-  await db.none(`
-  DROP TABLE IF EXISTS planets;  
-  
-  CREATE TABLE planets (
-    id SERIAL NOT NULL PRIMARY KEY,
-    name TEXT NOT NULL
-  );   
-  `)
-
-  await db.none(`INSERT INTO planets (name) VALUES ('Earth')`);
-  await db.none(`INSERT INTO planets (name) VALUES ('Mars')`);
-  await db.none(`INSERT INTO planets (name) VALUES ('Jupiter')`);
-  
-}
-setupDb();
+import {db} from './db.js'
 
 const getAll = async (req: Request, res: Response) => {
     const planets = await db.many(`SELECT * FROM planets;`);
@@ -54,4 +36,17 @@ const deleteById = async (req: Request, res: Response) => {
     
 }
 
-export { getAll, getOneById, create, updateById, deleteById}
+const createImage = async (req: Request, res: Response ) => {
+  console.log(req.file)
+  const {id}= req.params
+  const filename = req.file?.path
+  if(filename) {
+    res.status(201).json({msg: "Planet image uploaded successfully"})
+    db.none(`UPDATE planets SET image=$2 WHERE id=$1`, [id,filename])
+  }
+  else {
+    res.status(400).json({msg: "planet image failed to upload"})
+  }
+}
+
+export { getAll, getOneById, create, updateById, deleteById, createImage}
