@@ -4,6 +4,11 @@ import morgan from 'morgan';
 import Joi from 'joi'
 import {getAll, getOneById, create, updateById, deleteById, createImage} from './controllers/planets.js'
 import multer from 'multer';
+import {logIn} from './controllers/login.js';
+import {signUp} from './controllers/signUp.js'
+import {logOut} from './controllers/logOut.js'
+import authorize from './authorize.js';
+import './passport.js'
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
@@ -42,8 +47,16 @@ app.put('/api/planets/:id', updateById)
 app.delete('/api/planets/:id', deleteById)
 
 //route for uploading image
-
 app.post('/api/planets/:id/image', upload.single('image'), createImage)
+
+//route for user Login 
+app.post('/api/users/login', logIn)
+
+//route for user SignUp
+app.post('/api/users/signup', signUp)
+
+//route for user logOut
+app.get('/api/users/logout', authorize, logOut)
 
 app.listen(port, () => {
     console.log(`server successfuly launched on http://localhost:${port}`)
