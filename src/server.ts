@@ -21,7 +21,7 @@ const app = express()
 
 app.use(express.json())
 app.use(morgan('tiny'))
-
+app.use('/uploads', express.static('uploads'))
 
 //   const planetValidator = Joi.object({
 //     name: Joi.string().required(),
